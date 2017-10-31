@@ -18,7 +18,7 @@ def find_text(s, list):
     for name in list:
         with open(join_file(name)) as f:
             for str in f:
-                if s in str:
+                if s.lower() in str.lower():
                     new_list.append(name)
                     break
     return new_list
