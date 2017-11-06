@@ -3,25 +3,23 @@ import os
 
 migrations = 'Migrations'
 current_dir = os.path.dirname(os.path.abspath(__file__))
-m_dir = os.path.join(current_dir, migrations)             # генерируем абсолютный путь до Migrations и сохраняем в переменную m_dir
+m_dir = os.path.join(current_dir, migrations)             # генерируем абсолютный путь до Migrations
 
-def find_sql(list):
-    new_list = []
-    for name in list:
+def find_sql(files):
+    new_files = []
+    for name in files:
         filename, file_extension = os.path.splitext(name)
         if file_extension == ".sql":
-            new_list.append(name)
-    return new_list
+            new_files.append(name)
+    return new_files
 
-def find_text(s, list):
-    new_list = []
-    for name in list:
-        with open(join_file(name)) as f:
-            for str in f:
-                if s.lower() in str.lower():
-                    new_list.append(name)
-                    break
-    return new_list
+def find_text(s, commands):
+    new_commands = []
+    for command in commands:
+        with open(join_file(command)) as f:
+            if s.lower() in f.read().lower():
+                new_commands.append(command)
+    return new_commands
 
 def join_file(file_name):
     return os.path.join(m_dir, file_name)
